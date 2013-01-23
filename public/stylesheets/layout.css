@@ -1,0 +1,144 @@
+a {
+	text-decoration: none;
+	color: #336633;
+}
+a:hover {
+	color: #ffa600;
+}
+body { 
+	font-family: Arial; 
+	text-align: center; 
+}
+p { 
+	margin-bottom: 1em; 
+}
+#topbar {
+	width: 100%;
+	background-color: #336633;
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+#top-content {
+	width: 960px;
+	height: 40px;
+	background-color: #336633;
+	margin-left: auto;
+	margin-right: auto;
+}
+#outer {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#content {
+	width: 926px;
+	float: left;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-bottom: 32px;
+	border-color: #cccccc;
+	border-style: dotted;
+	border-width: 1px;
+	border-top: none;
+	text-align: left;
+}
+h1 {
+	width: 100%;
+	font-size: 1.4em;
+	color: #336633; 
+	padding-top:1em; 
+	padding-bottom: 0.5em; 
+}
+h2 {
+	width: 100%; 
+	color: #336633;
+	margin-bottom: 0.5em;
+}
+#content-body {
+	float: left;
+	width: 100%;
+}
+#footer {
+	width: 100%;
+}
+#footer-content {
+	float: left;
+	width: 960px;
+	font-size: small;
+	color: #999999;
+	padding-top: 1em;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.flash-message {
+	float: left;
+	width: 100%;
+	margin-bottom: 1em;
+}
+.flash-message-content {
+	width: 90%;
+	height: 48px;
+	margin: auto;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+}
+.message-text {
+	float: left; 
+	margin-left: 2em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+.flash-close {
+	float: right;
+	width: 16px;
+	height: 16px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	margin-right: 2em;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	line-height: 16px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: white;
+	font-weight: bold;
+	font-size: 11px;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+}
+.red-alert {
+	background: #f8e8e8;
+	border-color: #d8c8c8;
+}
+.red-alert .flash-close {
+	border-color: #d8c8c8;
+	color: #d8c8c8;
+}
+.yellow-alert {
+	background: #f8f8e8;
+	border-color: #d8d8c8;
+}
+.yellow-alert .flash-close {
+	border-color: #d8d8c8;
+	color: #d8d8c8;
+}
+.green-alert {
+	background: #e8f8e8;
+	border-color: #c8d8c8;
+}
+.green-alert .flash-close {
+	border-color: #c8d8c8;
+	color: #c8d8c8;
+}
+.menu li {
+	display: inline;
+	margin-right: 1em;
+}

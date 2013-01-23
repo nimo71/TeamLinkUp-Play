@@ -1,0 +1,179 @@
+@( 
+	encodedId: String
+)(
+    implicit 
+    request: play.api.mvc.RequestHeader
+)
+
+@import play.api.i18n._
+@import tags._
+
+@head = {
+<link rel="stylesheet" media="screen" href="assets/javascripts/jquery-ui-1.8.9.custom/css/custom-theme/jquery-ui-1.8.9.custom.css"> 
+<link rel="stylesheet" media="screen" href="assets/stylesheets/popup.css">
+<link rel="stylesheet" media="screen" href="assets/stylesheets/form.css">
+<style type="text/css">
+	label {
+		float: left; 
+		clear: left;
+		width: 5em;
+	}
+	input {
+		float: left;
+	}
+	#vs {
+		float: left; 
+		margin-left: 1em;
+		margin-right: 1em;
+	}
+	#selections {
+		float: left;
+		clear: left; 
+	}
+	#date {
+		margin-right: 1em;
+	}
+	.menu {
+		font-size: small;
+	}
+	.button {
+		float: right;
+		padding-left: 1em;
+		padding-right: 1em;
+		margin-left: 1em;
+		line-height: 1.5em;
+	}
+	.ok {
+	    color: white;
+		background: #336633;
+	    border-top: grey; 
+	    border-left: grey;
+	    border-bottom: black;
+	    border-right: black;
+		border-style: solid;
+		border-width: 1px;
+	}
+	.cancel {
+		border-color: #336633;
+		border-style: solid;
+		border-width: 1px;
+	}
+	.row {
+		float: left;
+		clear: both;
+		width: 100%;
+		margin-top: 1em;
+	}
+</style>
+<script src="@routes.Assets.at("javascripts/popup.js")" type="text/javascript"></script>	  
+}
+
+@profile = {
+	@request.flash.get("message").map { msg => 
+		@alert("green-alert", Messages(msg)) 
+	}
+	<ul class="menu"><li>
+		<li><a id="createFixture">Create</a></li>
+	</ul>
+	<div id="selections">
+	</div>
+	<div id="createFixturePopup" class="popup">
+		<span class="popup-close">X</span>
+		<h1>Create Fixture</h1>
+		<div class="row">
+			<label>Heading:</label><input id="home" type="text"/><span id="vs">vs</span><input id="away"/>
+		</div>
+		<div class="row">
+			<label>Date:</label><input id="date" type="text">
+		</div>
+		<div class="row">
+			<label>Time:</label><input id="time" type="text"/>
+		</div>
+		<div class="row">
+			<a id="cancelFixtureButton" class="cancel button">Cancel</a>
+			<a id="createFixtureButton" class="ok button" href="@routes.FixtureController.create()">OK</a>
+		</div>
+	</div>
+	<div id="backgroundPopup"></div>
+}
+
+@main("Fixtures", profile, head) 
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+    	
+    	$.ajaxSetup({
+            contentType : 'application/json',
+            processData : false,
+            timeout : 7000
+        });
+        
+    	$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+            if (options.data){
+                options.data=JSON.stringify(options.data);
+            }
+        });
+
+    	var createFixturePopup = new PopUp("#createFixturePopup");
+    	createFixturePopup.clearErrors = function() {
+    		$("#createFixturePopup .error").each(function() {
+        		$(this).remove()
+        	});
+    	}
+    	createFixturePopup.clear = function() {
+    		$("#createFixturePopup input").each(function() {
+    			$(this).val("");
+    			createFixturePopup.clearErrors();
+    		});
+    	} 
+        $("#createFixture").click(function() {
+        	createFixturePopup.clear();
+	        createFixturePopup.center();
+	        createFixturePopup.load();
+	        false;
+        }); 
+        
+        $("#createFixtureButton").click(function() {
+        	createFixturePopup.clearErrors();
+        	var url = $("#createFixtureButton").attr("href");
+        	var home = $("#home").val();
+        	var away = $("#away").val();
+        	var date = $("#date").val();
+        	var time = $("#time").val();
+        	
+        	$.ajax({
+        		type: "PUT",
+        		url: url,
+        		contentType: "application/json",
+        		data: {
+        			"home" : home, 
+        			"away" : away, 
+        			"date" : date, 
+        			"time" : time
+        		}
+        	})
+       		.done(function(data) {
+        		var res = JSON.parse(data);
+        		if (res['errors'] === undefined || Object.keys(res['errors']).length == 0) {
+        			createFixturePopup.disable();
+        			// update fixture list here 
+        		}
+        		var errors = res['errors'];
+        		
+        		$.each(errors, function(key, value) {
+        			$("#"+ key).after($('<span class="error"></span>').text(value))
+        		})
+        	})
+        	.fail(function() {
+        		createFixturePopup.disable();
+        	});
+        	
+        	return false;
+        });
+        
+        $("#cancelFixtureButton").click(function(){
+	        createFixturePopup.disable();  
+        });  
+    });
+</script>

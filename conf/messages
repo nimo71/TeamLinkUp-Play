@@ -1,0 +1,10 @@
+error.required = Enter a value
+error.invalid.email = Enter a valid email address
+error.password = Enter a password with between {0} and {1} characters
+invalid.login.credentials = Invalid email or password
+values.dont.match = {0} and {1} must match
+user.already.exists = Email already registered
+log.in.after.registration = Log in with your email and password
+password.reset = Log in with the new password sent to your inbox
+log.in.successful = Welcome {0}
+log.in = Log in with your email and password

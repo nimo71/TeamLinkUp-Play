@@ -1,0 +1,10 @@
+@(
+	alertType: String, 
+	message: String
+)
+<div class="flash-message">
+	<div class="flash-message-content @alertType">
+		<span class="message-text">@message</span>
+		<span class="flash-close" onClick="$(this).parents('.flash-message').remove()">X</span>
+	</div>
+</div>

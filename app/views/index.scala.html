@@ -1,0 +1,86 @@
+@(
+	logInForm: Form[(String, String)],
+	message: String = "", 
+	alertType: String = "green-alert" 
+)(
+    implicit 
+    request: play.api.mvc.RequestHeader
+)
+
+@import play.api.i18n._
+@import tags._
+
+@style = {
+<link rel="stylesheet" media="screen" href="assets/stylesheets/form.css">   
+<link rel="stylesheet" media="screen" href="assets/javascripts/jquery-ui-1.8.9.custom/css/custom-theme/jquery-ui-1.8.9.custom.css">  
+<style type="text/css">
+	#register-link {
+		display: block;
+		float: left;
+		margin-top: 1.2em;
+		margin-left: 0.5em;
+		color: #336633;
+	}
+	#register-link a {
+		text-decoration: underline;
+	}
+	#forgotten-password {
+		display: block;
+		float: left;
+		clear: left;
+		margin-left: 14.5em;
+		font-size: small;
+	}
+	#forgotten-password a {
+		color: #999999;
+	}
+	#forgotten-password a:hover {
+		color: #ffa600;
+	}
+</style>	  
+}
+
+@form = {
+<form class="tlu-form" action="@routes.Application.logIn" method="POST">
+	@request.flash.get("message").map { msg => 
+		@alert("green-alert", Messages(msg)) 
+	}
+	
+	@request.flash.get("errorMessage").map { msg => 
+		@alert("red-alert", Messages(msg)) 
+	}
+	
+	@if(logInForm.hasErrors || logInForm.hasGlobalErrors) {
+		@alert("red-alert", "Please make corrections...")
+	}
+	
+	@if(logInForm.hasGlobalErrors) {
+	<ul>@logInForm.globalError.map { error =>
+		<li><span class="error">@error.message</span></li>
+    	}
+    </ul>
+    }
+	
+	@logInForm.forField("email") { field =>
+      <label>Email</label>
+      <input type="text" name="@field.name" value="@field.value">
+      @field.error.map { error =>
+      	<span class="error">@Messages(error.message)</span> 
+      } 
+    }
+	
+	@logInForm.forField("password") { field =>
+      <label>Password</label>
+      <input type="password" name="@field.name" value="@field.value">
+      @field.error.map { error =>
+        <span class="error">@Messages(error.message)</span>
+      } 
+    }
+	<span id="forgotten-password"><a href="@routes.ResetPasswordController.forgottenPassword">Forgot your password?</a></span>
+			
+	<input type="submit" class="submit-input" value="Log In"/> 
+	<span id="register-link">or <a href="@routes.RegistrationController.registration">register</a>, if you don't have an acccount.</span> 
+</form>
+}
+
+@main("Log In to TeamLinkUp", form, style) 

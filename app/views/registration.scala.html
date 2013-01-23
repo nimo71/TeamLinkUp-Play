@@ -1,0 +1,61 @@
+@(
+	registrationForm: Form[((String, String), (String, String))]
+)(
+    implicit 
+    request: play.api.mvc.RequestHeader
+)
+
+@import tags._
+
+@style = {
+<link rel="stylesheet" media="screen" href="assets/stylesheets/form.css">  
+}
+
+@register = {
+
+<form class="tlu-form" action="@routes.RegistrationController.register" method="POST">
+	@if(registrationForm.hasErrors || registrationForm.hasGlobalErrors) {
+		@alert("red-alert", "Please make corrections...")
+	}
+	@registrationForm.globalErrors.map {error => 
+		<span class="error">@Messages(error.message)</span>
+	}
+	@registrationForm.forField("email.main") { field =>
+      	<label>Email</label>
+      	<input type="text" name="@field.name" value="@field.value">
+      	@field.error.map { error =>
+      		<span class="error">@Messages(error.message)</span> 
+      	} 
+    }
+	@registrationForm.forField("email.confirm") { field =>
+      	<label>Confirm Email</label>
+      	<input type="text" name="@field.name" value="@field.value">
+      	@field.error.map { error =>
+      		<span class="error">@Messages(error.message)</span> 
+      	} 
+    }
+    @registrationForm.error("email").map { error => 
+    	<span class="error">@Messages(error.message)</span> 
+    }
+	@registrationForm.forField("password.main") { field =>
+      	<label>Password</label>
+      	<input type="password" name="@field.name" value="@field.value">
+      	@field.error.map { error =>
+        	<span class="error">@Messages(error.message)</span>
+      	} 
+    }
+	@registrationForm.forField("password.confirm") { field =>
+      	<label>Confirm Password</label>
+      	<input type="password" name="@field.name" value="@field.value">
+      	@field.error.map { error =>
+        	<span class="error">@Messages(error.message)</span>
+      	} 
+    }
+    @registrationForm.error("password").map {error => 
+    	<span class="error">@Messages(error.message)</span> 
+    }
+	<input type="submit" class="submit-input" value="Register"/>  
+</form>
+}
+
+@main("Register with TeamLinkUp", register, style) 

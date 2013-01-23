@@ -1,0 +1,36 @@
+@(
+	heading: String = "", 
+	body: => Html, 
+	head: => Html = { Html("") }
+)(
+    implicit 
+    request: play.api.mvc.RequestHeader
+)
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>TeamLinkUp - @heading</title>
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/reset.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/layout.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    @head
+</head>
+<body>
+	<div id="topbar">
+		<div id="top-content">&nbsp;</div>
+	</div>
+	<div id="outer">
+	<div id="content">
+		<h1>@heading</h1>
+		<div id="content-body">	
+		@body
+		</div>
+	</div> <!-- content -->	
+	<div id="footer">
+		<div id="footer-content">&copy;TeamLinkUp 2012</div>
+	</div>
+	</div> <!-- outer -->
+</body>
+</html>

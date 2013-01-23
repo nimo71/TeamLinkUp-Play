@@ -1,0 +1,60 @@
+label {
+	float: left;
+	width: 11em;
+	clear: left;
+	text-align: right;
+	margin-top: 0.9em;
+	color: #336633;
+}
+input { 
+	float: left; 
+	clear: right;
+	margin-top: 0.5em;
+	margin-bottom: 4px;
+	margin-left: 0.5em;
+	margin-right: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #336633;
+	font-size: 1em;
+}
+.tlu-form {
+	float: left;
+	width: 100%;
+	border-color: #cccccc;
+	border-style: dotted;
+	border-width: 1px;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	padding-top: 2em;
+	margin-top: 1em;
+}
+.submit-input {
+	float: left;
+	clear: left;
+	margin-top: 1em;
+	margin-left: 11.5em;
+	background-color: #336633;
+	color: white;
+	border-color: #999999;
+	border-right-color: #333333;
+	border-bottom-color: #333333;
+}
+.text-input {
+	width: 20em;
+	padding: 0.3em;
+}
+.error {
+	float: left;
+	color: #cc0000;
+	font-style: italic;
+	margin-top: 0.5em;
+	margin-bottom: 4px;
+	margin-left: 0.5em;
+	margin-right: 4px;
+	padding: 0.3em;
+}
+.input-error {
+	border-color: darkred;
+}
