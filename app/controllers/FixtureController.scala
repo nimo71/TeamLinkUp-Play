@@ -42,6 +42,7 @@ object FixtureController extends Controller {
       	    	None
       	    case Some(home) => Some(home) 
       	}
+      	
       	val away = (request.body \ "away").asOpt[String] match {
       	  	case None => 
       	  	  	errors += ("away" -> Messages("fixture.away.not.none"))
@@ -51,6 +52,7 @@ object FixtureController extends Controller {
       	  		None
       	  	case Some(away) => Some(away)
       	}
+      	
       	var dateRegExp = """(dd)/(dd)/(dddd)""".r
       	val date = (request.body \ "date").asOpt[String] match {
       	  	case None => 
@@ -64,6 +66,7 @@ object FixtureController extends Controller {
       	  	  	errors += ("date" -> Messages("fixture.date.bad.format"))
       	  	  	None
       	}
+      	
       	val time = (request.body \ "time").asOpt[String] match {
       	  	case None => 
       	  	  	errors += ("time" -> Messages("fixture.time.not.none"))
