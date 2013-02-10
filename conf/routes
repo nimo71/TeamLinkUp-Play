@@ -11,7 +11,7 @@ GET     /forgottenPassword          controllers.ResetPasswordController.forgotte
 POST	/resetPassword				controllers.ResetPasswordController.resetPassword()
 GET		/notices					controllers.UserController.notices()
 GET		/fixtures					controllers.FixtureController.fixtures()
-PUT		/fixtures/create			controllers.FixtureController.create()
+#PUT		/fixtures/create			controllers.FixtureController.create()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

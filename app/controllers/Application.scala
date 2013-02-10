@@ -41,7 +41,7 @@ object Application extends Controller {
     /**
     	Process the login form
     */
-    def logIn() = Action { implicit request =>
+    def logIn() = Action { implicit request => 
     	logInForm.bindFromRequest.fold(
       		formWithErrors => BadRequest(html.index(formWithErrors)),
       		result => 
